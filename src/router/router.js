@@ -53,27 +53,80 @@ export const otherRouter = {
 // 作为Main组件的子页面展示并且在左侧菜单显示的路由写在appRouter里
 export const appRouter = [
   {
-    path: '/page1',
+    path: '/dashboard',
     icon: 'grid',
-    name: 'page1',
-    title: '页面1',
+    name: 'dashboard',
+    title: '面板',
     component: Main,
+    access: 0,
     children: [
-      { path: 'page11', title: '页面1-1', name: 'page1_1',   access: [0,1],icon: 'ios-analytics',component: () => import('@/components/HelloWorld') },
-      { path: 'page12', title: '页面1-2', name: 'page1_2',   access: [1,2],icon: 'ios-analytics', component: () => import('@/components/HelloWorld') }
+      { path: 'home', title: '面板', name: 'dashboard_index', icon: 'ios-flask-outline',component: () => import('@/views/dashboard/dashboard') },
     ]
   },
   {
-    path: '/page2',
+    path: '/users',
+    icon: 'grid',
+    name: 'users',
+    title: '用户管理',
+    component: Main,
+    access: 0,
+    children: [
+      { path: 'index', title: '用户管理', name: 'users_index', icon: 'person-stalker',component: () => import('@/views/users/users') },
+    ]
+  },
+  {
+    path: '/articles',
     icon: 'android-menu',
-    name: 'page2',
-    title: '页面2',
+    name: 'articles',
+    title: '文章管理',
     component: Main,
     access: [0,1],
     children: [
-      { path: 'page21', title: '页面2-1', name: 'page2_1',  access: [0],icon: 'ios-photos', component: () => import('@/components/HelloWorld') },
-      { path: 'page22', title: '页面2-2', name: 'page2_2',  access: [2,1],icon: 'ios-analytics', component: () => import('@/components/HelloWorld') }
-
+      { path: 'index', title: '文章管理', name: 'articles_index',  access: [0,1],icon: 'document-text', component: () => import('@/views/articles/articles') }
+    ]
+  },
+  {
+    path: '/tags',
+    icon: 'android-menu',
+    name: 'tags',
+    title: '标签管理',
+    component: Main,
+    access: [0],
+    children: [
+      { path: 'index', title: '标签管理', name: 'tags_index',  access: [0],icon: 'pricetags', component: () => import('@/views/tags/tags') }
+    ]
+  },
+  {
+    path: '/categories',
+    icon: 'android-menu',
+    name: 'categories',
+    title: '分类管理',
+    component: Main,
+    access: [0],
+    children: [
+      { path: 'index', title: '分类管理', name: 'categories_index',  access: [0],icon: 'ios-list', component: () => import('@/views/categories/categories') }
+    ]
+  },
+  {
+    path: '/friendslinks',
+    icon: 'android-menu',
+    name: 'friendslinks',
+    title: '友链管理',
+    component: Main,
+    access: [0],
+    children: [
+      { path: 'index', title: '友链管理', name: 'friendslinks_index',  access: [0],icon: 'ios-world', component: () => import('@/views/friendslinks/friendslinks') }
+    ]
+  },
+  {
+    path: '/systems',
+    icon: 'android-menu',
+    name: 'systems',
+    title: '系统配置',
+    component: Main,
+    access: [0],
+    children: [
+      { path: 'config', title: '系统配置', name: 'system_index',  access: [0],icon: 'android-settings', component: () => import('@/views/systems.vue') }
     ]
   }
 ];

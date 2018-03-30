@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 
 const app = {
     state: {
+        dashData:{userNumber:11,browNumber:4988,articleNumber:50,discussionNumber:20},
         cachePage: [],
         isFullScreen: false,
         openedSubmenuArr: [], // 要展开的菜单数组
