@@ -1,6 +1,5 @@
 <style lang="less">
 @import "./home.less";
-//@import "../../styles/common.less";
 </style>
 <template>
     <div class="home-main">
@@ -49,29 +48,12 @@
 </template>
 
 <script>
-// import cityData from './map-data/get-city-value.js';
-// import homeMap from './components/map.vue';
-// import dataSourcePie from './components/dataSourcePie.vue';
-// import visiteVolume from './components/visiteVolume.vue';
-// import serviceRequests from './components/serviceRequests.vue';
-// import userFlow from './components/userFlow.vue';
-// import countUp from './components/countUp.vue';
-// import inforCard from './components/inforCard.vue';
-// import mapDataTable from './components/mapDataTable.vue';
-// import toDoListItem from './components/toDoListItem.vue';
+
 import Cookies from 'js-cookie';
 export default {
     name: 'home',
     components: {
-        // homeMap,
-        // dataSourcePie,
-        // visiteVolume,
-        // serviceRequests,
-        // userFlow,
-        // countUp,
-        // inforCard,
-        // mapDataTable,
-        // toDoListItem
+ 
     },
     data () {
         return {
@@ -88,26 +70,7 @@ export default {
         }
     },
     methods: {
-        addNewToDoItem () {
-
-        },
-        addNew () {
-            if (this.newToDoItemValue.length !== 0) {
-                this.toDoList.unshift({
-                    title: this.newToDoItemValue
-                });
-                setTimeout(() => {
-                    this.newToDoItemValue = '';
-                }, 200);
-                this.showAddNewTodo = false;
-            } else {
-                this.$Message.error('请输入待办事项内容');
-            }
-        },
-        cancelAdd () {
-            this.showAddNewTodo = false;
-            this.newToDoItemValue = '';
-        }
+      
     }
 };
 </script>

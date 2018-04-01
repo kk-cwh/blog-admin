@@ -1,5 +1,6 @@
 import HelloWorld from '@/components/HelloWorld'
 import Main from '@/views/Main.vue'
+import Blog from '@/blog-view/index.vue'
 
 // 不作为Main组件的子页面展示的页面单独写，如下
 export const loginRouter = {
@@ -133,6 +134,7 @@ export const appRouter = [
 ];
 export const routers = [
   loginRouter,
+  // preview,
   otherRouter,
   ...appRouter,
   page500,
