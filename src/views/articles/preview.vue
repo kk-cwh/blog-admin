@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="nav-bar">
-  
+  preview
 </div>
 
 </div>

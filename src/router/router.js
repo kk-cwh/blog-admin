@@ -48,6 +48,7 @@ export const otherRouter = {
     { path: 'home', title: '首页', name: 'home_index', component: () => import('@/views/home/home.vue') },
     { path: 'ownspace', title: '个人中心', name: 'ownspace_index', component: () => import('@/views/own-space/own-space') },
     { path: 'add-article', title: '创建文章', name: 'add_article', component: () => import('@/views/articles/add-article.vue') },
+    { path: 'preview', title: '文章预览', name: 'preview_article', component: () => import('@/views/articles/preview.vue') },
   ]
 };
 
