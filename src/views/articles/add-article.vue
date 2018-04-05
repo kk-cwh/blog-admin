@@ -44,8 +44,8 @@
 
 <template>
     <div>
-        <Row :gutter="16">
-            <Col span="18">
+        <Row :gutter="32">
+            <Col span="16">
             <Card>
                 <Row>
                     <Col span="16" offset="4">
