@@ -3,165 +3,186 @@
         <Button @click="handleSelectAll(true)" type="primary">全选</Button>
         <Button @click="handleSelectAll(false)">取消全选</Button>
         <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
-        <Page :total="dataCount"  show-elevator show-sizer :page-size="10"></Page>
+        <Page :total="dataCount" show-elevator show-sizer :page-size="10"></Page>
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                columns: [
-                    {
-                        type: 'selection',
-                        width: 60,
-                        align: 'center'
-                    },
-                    {
-                        title: 'ID',
-                        width: 60,
-                        key: 'id'
-                    },
-                    {
-                        title: '头像',
-                        width: 80,
-                        key: 'avatar'
-                    },
-                    {
-                        title: '用户名',
-                        key: 'name'
-                    },
-                    {
-                        title: '邮箱',
-                        key: 'email'
-                    },
-                     {
-                        title: '状态',
-                        key: 'status',
-                        width:90,
-                        render:(h, params) => {
-                          return h('div',[h('i-switch',{
-                            props: {
-                                        value: params.row.status,
-                                        size:'large'
-                                    },
-                                    scopedSlots:{
-                                      open:()=>{
-                                        return '启用';
-                                      },
-                                      close:()=>{
-                                        return '停用';
-                                      }
-                                    },
-                                    on: {
-                                        'on-change': (status) => {
-                                            this.changeStatus(params.index)
-                                        }
-                                    }
-                          })]);
-                        }
-                    }
-                    ,
-                     {
-                        title: '创建时间',
-                        key: 'created_at'
-                    },{
-                      title:'操作',
-                      key:'action',
-                      render: (h, params) => {
-                            return h('div', [
-                              h('Button', {
-                                    props: {
-                                        type: 'success',
-                                        icon: 'eye',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.show(params.index)
-                                        }
-                                    }
-                                }, '查看'),
-                                  h('Button', {
-                                    props: {
-                                        type: 'error',
-                                        icon: 'compose',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.show(params.index)
-                                        }
-                                    }
-                                }, '编辑')
-
-
-                            ]);
-                        }
-                    }
-                ],
-                userDatas: [
-                    {
-                        id:1,
-                        name: 'John Brown',
-                        avatar: 18,
-                        email: 'New York No. 1 Lake Park',
-                        status: false,
-                        created_at: '2016-10-03'
-                    },
-                    {
-                        id:2,
-                        name: 'John Brown',
-                        avatar: 18,
-                        email: 'New York No. 1 Lake Park',
-                        status: false,
-                        created_at: '2016-10-03'
-                    },
-                     {
-                        id:3,
-                        name: 'John Brown',
-                        avatar: 18,
-                        email: 'New York No. 1 Lake Park',
-                        status: true,
-                        created_at: '2016-10-03'
-                    },
-                     {
-                        id:4,
-                        name: 'John Brown',
-                        avatar: 18,
-                        email: 'New York No. 1 Lake Park',
-                        status: false,
-                        created_at: '2016-10-03'
-                    }
-                ]
-            }
+export default {
+  data() {
+    return {
+      columns: [
+        {
+          type: "selection",
+          width: 60,
+          align: "center"
         },
-        computed:{
-dataCount:function(){
-  return this.userDatas.length;
-}
+        {
+          title: "ID",
+          width: 60,
+          key: "id"
         },
-        methods: {
-            handleSelectAll (status) {
-                this.$refs.selection.selectAll(status);
-            }
-            ,changeStatus(index){
-               this.userDatas[index].status = !this.userDatas[index].status;
-              //  console.log( this.userDatas)
-            },
-            show(index){
-                this.$Message.info('当前查看索引' + index);
-
-            },
-            selectAlldata(datass){
-                this.$Message.success('选择了全部');
-                console.log(datass);
-            }
+        {
+          title: "头像",
+          width: 80,
+          key: "avatar"
+        },
+        {
+          title: "用户名",
+          key: "name"
+        },
+        {
+          title: "邮箱",
+          key: "email"
+        },
+        {
+          title: "状态",
+          key: "status",
+          width: 90,
+          render: (h, params) => {
+            return h("div", [
+              h("i-switch", {
+                props: {
+                  value: params.row.status,
+                  size: "large"
+                },
+                scopedSlots: {
+                  open: () => {
+                    return "启用";
+                  },
+                  close: () => {
+                    return "停用";
+                  }
+                },
+                on: {
+                  "on-change": status => {
+                    this.changeStatus(params.index);
+                  }
+                }
+              })
+            ]);
+          }
+        },
+        {
+          title: "创建时间",
+          key: "created_at"
+        },
+        {
+          title: "操作",
+          key: "action",
+          render: (h, params) => {
+            return h("div", [
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "success",
+                    icon: "eye",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.show(params.index);
+                    }
+                  }
+                },
+                "查看"
+              ),
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "error",
+                    icon: "compose",
+                    size: "small"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.show(params.index);
+                    }
+                  }
+                },
+                "编辑"
+              )
+            ]);
+          }
         }
+      ],
+      userDatas: [
+        {
+          id: 1,
+          name: "John Brown",
+          avatar: 18,
+          email: "New York No. 1 Lake Park",
+          status: false,
+          created_at: "2016-10-03"
+        },
+        {
+          id: 2,
+          name: "John Brown",
+          avatar: 18,
+          email: "New York No. 1 Lake Park",
+          status: false,
+          created_at: "2016-10-03"
+        },
+        {
+          id: 3,
+          name: "John Brown",
+          avatar: 18,
+          email: "New York No. 1 Lake Park",
+          status: true,
+          created_at: "2016-10-03"
+        },
+        {
+          id: 4,
+          name: "John Brown",
+          avatar: 18,
+          email: "New York No. 1 Lake Park",
+          status: false,
+          created_at: "2016-10-03"
+        }
+      ]
+    };
+  },
+  mounted(){
+    this.init();
+  },
+  computed: {
+    dataCount: function() {
+      return this.userDatas.length;
     }
+  },
+  methods: {
+      init(){
+         this.$store
+            .dispatch("UserList",{page:1})
+            .then((result) => {
+             console.log(result);
+             this.userDatas = result.data.list;
+            })
+            .catch(() => {
+              this.$Message.error("Login Fail!");
+            });
+      },
+    handleSelectAll(status) {
+      this.$refs.selection.selectAll(status);
+    },
+    changeStatus(index) {
+      this.userDatas[index].status = !this.userDatas[index].status;
+      //  console.log( this.userDatas)
+    },
+    show(index) {
+      this.$Message.info("当前查看索引" + index);
+    },
+    selectAlldata(datass) {
+      this.$Message.success("选择了全部");
+      console.log(datass);
+    }
+  }
+};
 </script>

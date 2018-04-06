@@ -2,10 +2,11 @@ import {otherRouter, appRouter} from '@/router/router';
 
 import util from '@/libs/util';
 import Cookies from 'js-cookie';
-// import Vue from 'vue';
+import http from '@/libs/http.js';
 
 const app = {
     state: {
+        username:'',
         dashData:{userNumber:11,browNumber:4988,articleNumber:50,discussionNumber:20},
         cachePage: [],
         isFullScreen: false,
@@ -166,7 +167,169 @@ const app = {
             state.pageOpenedList.push(tagObj);
             localStorage.pageOpenedList = JSON.stringify(state.pageOpenedList);
         }
-    }
+    },
+    actions: {
+        Login ({ commit }, userInfo) {
+          return new Promise((resolve, reject) => {
+            http({
+              url: '/api/login',
+              method: 'post',
+              data: userInfo
+            }).then(response => {
+              if (response.data) {
+                const data = response.data
+                Cookies.set('token',data.token_type + ' ' + data.access_token)
+                Cookies.set('access', 0);
+                Cookies.set('user', userInfo.username);
+                resolve();
+              }
+            }).catch(error => {
+              reject(error);
+            })
+          })
+        },
+        GetUserInfo ({ commit }) {
+          return new Promise((resolve, reject) => {
+            http({
+              url: '/api/user_info',
+              method: 'get'
+            }).then(response => {
+              if (response.data) {
+                let data = response.data
+                let user = data.data;
+                commit('setAvator',"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg")
+                
+                this.state.username = user.name
+    
+                resolve()
+              }
+            }).catch(error => {
+              reject(error)
+            })
+          })
+        },
+        // Logout ({ commit }) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: '/api/logout',
+        //       method: 'post'
+        //     }).then(response => {
+        //       if (response.data) {
+        //         // console.log(response.data)
+    
+        //         removeToken()
+        //         commit('CLEAR_STATE')
+        //         console.log(this.state)
+        //         resolve()
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        UserList ({ commit }, data) {
+          return new Promise((resolve, reject) => {
+            http({
+              url: `/api/users?page=${data.page}`,
+              method: 'get'
+            }).then(response => {
+              if (response.data) {
+                resolve(response.data)
+              }
+            }).catch(error => {
+              reject(error)
+            })
+          })
+        },
+        // AddUser ({ commit }, userInfo) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: '/api/users',
+        //       method: 'post',
+        //       data: userInfo
+        //     }).then(response => {
+        //       if (response.data) {
+        //         resolve(response.data)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        // TypeList ({ commit }) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: '/api/types',
+        //       method: 'get'
+        //     }).then(response => {
+        //       if (response.data) {
+        //         resolve(response.data)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        // AddArticle ({ commit }, article) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: '/api/articles',
+        //       method: 'post',
+        //       data: article
+        //     }).then(response => {
+        //       if (response.data) {
+        //         resolve(response)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        // UpdateArticle ({ commit }, article) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: `/api/articles/${article.id}`,
+        //       method: 'put',
+        //       data: article
+        //     }).then(response => {
+        //       if (response.data) {
+        //         resolve(response)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        // GetArticleDetail ({ commit }, data) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: `/api/articles/${data.id}`,
+        //       method: 'get'
+        //     }).then(response => {
+        //       if (response.data) {
+        //         const data = response.data
+        //         resolve(data)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // },
+        // ArticleList ({ commit }, data) {
+        //   return new Promise((resolve, reject) => {
+        //     http({
+        //       url: `/api/articles?page=${data.page}`,
+        //       method: 'get'
+        //     }).then(response => {
+        //       if (response.data) {
+        //         resolve(response.data)
+        //       }
+        //     }).catch(error => {
+        //       reject(error)
+        //     })
+        //   })
+        // }
+      }
 };
 
 export default app;

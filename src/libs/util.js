@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import semver from 'semver';
 import packjson from '../../package.json';
 
@@ -10,10 +8,6 @@ util.title = function (title) {
     title = title || 'iView admin';
     window.document.title = title;
 };
-
-util.ajax = axios.create({
-    timeout: 30000
-});
 
 util.inOf = function (arr, targetArr) {
     let res = true;
