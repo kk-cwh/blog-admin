@@ -60,22 +60,24 @@ export default {
     handleSubmit() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store
-            .dispatch("Login",{
-              username: this.form.userName,
-              password: this.form.password
-            })
-            .then(() => {
-              this.$store.dispatch("GetUserInfo").then(() => {
-                this.$Message.success("Success!");
+          // this.$store
+          //   .dispatch("Login",{
+          //     username: this.form.userName,
+          //     password: this.form.password
+          //   })
+          //   .then(() => {
+          //     this.$store.dispatch("GetUserInfo").then(() => {
+          //       this.$Message.success("Success!");
+          //       this.$router.push({name: "home_index"});
+          //     });
+          //   })
+          //   .catch(() => {
+          //     this.$Message.error("Login Fail!");
+          //   });
+
+                Cookies.set('access', 0);
+                Cookies.set('user', 'admin');
                 this.$router.push({name: "home_index"});
-              });
-            })
-            .catch(() => {
-              this.$Message.error("Login Fail!");
-            });
-          
-          
         }
       });
     }
