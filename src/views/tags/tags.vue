@@ -4,12 +4,29 @@
         <Button @click="handleSelectAll(false)">取消全选</Button>
         <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
         <Page :total="dataCount"  show-elevator show-sizer :page-size="10"></Page>
+      <Modal v-model="modal1" title="标签信息" @on-ok="ok" @on-cancel="cancel">
+      <Form :model="editRow" label-position="right" :label-width="100">
+        <FormItem label="标签">
+          <Input v-model="editRow.name"></Input>
+        </FormItem>
+        <FormItem label="标题">
+          <Input v-model="editRow.email"></Input>
+        </FormItem>
+        <FormItem label="描述">
+          <Input v-model="editRow.avatar"></Input>
+        </FormItem>
+      </Form>
+    </Modal>
+
     </div>
 </template>
 <script>
     export default {
         data () {
+
             return {
+               modal1:false,
+               editRow:{},
                 columns: [
                     {
                         type: 'selection',
@@ -155,13 +172,20 @@ dataCount:function(){
               //  console.log( this.userDatas)
             },
             show(index){
-                this.$Message.info('当前查看索引' + index);
-
+               this.modal1 = true;
+               this.$Message.info("当前查看索引" + index);
+               this.editRow = this.userDatas[index];
             },
             selectAlldata(datass){
                 this.$Message.success('选择了全部');
                 console.log(datass);
+            } ,
+            ok() {
+              console.log('ok')
+            },
+            cancel() {
+              console.log('cancel')
             }
-        }
+                }
     }
 </script>
