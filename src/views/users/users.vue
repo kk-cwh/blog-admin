@@ -1,15 +1,31 @@
 <template>
-    <div>
-        <Button @click="handleSelectAll(true)" type="primary">全选</Button>
-        <Button @click="handleSelectAll(false)">取消全选</Button>
-        <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
-        <Page :total="dataCount" show-elevator show-sizer :page-size="10"></Page>
-    </div>
+  <div>
+    <Button @click="handleSelectAll(true)" type="primary">全选</Button>
+    <Button @click="handleSelectAll(false)">取消全选</Button>
+    <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
+    <Page :total="dataCount" show-elevator show-sizer :page-size="10"></Page>
+
+    <Modal v-model="modal1" title="用户信息" @on-ok="ok" @on-cancel="cancel">
+      <Form :model="editRow" label-position="right" :label-width="100">
+        <FormItem label="姓名">
+          <Input v-model="editRow.name"></Input>
+        </FormItem>
+        <FormItem label="邮箱">
+          <Input v-model="editRow.email"></Input>
+        </FormItem>
+        <FormItem label="头像">
+          <Input v-model="editRow.avatar"></Input>
+        </FormItem>
+      </Form>
+    </Modal>
+  </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      modal1: false,
+      editRow: {},
       columns: [
         {
           type: "selection",
@@ -149,26 +165,26 @@ export default {
       ]
     };
   },
-  mounted(){
+  mounted() {
     this.init();
   },
   computed: {
-    dataCount: function() {
+    dataCount: function () {
       return this.userDatas.length;
     }
   },
   methods: {
-      init(){
-         this.$store
-            .dispatch("UserList",{page:1})
-            .then((result) => {
-             console.log(result);
-             this.userDatas = result.data.list;
-            })
-            .catch(() => {
-              this.$Message.error("Login Fail!");
-            });
-      },
+    init() {
+      this.$store
+        .dispatch("UserList", { page: 1 })
+        .then((result) => {
+          console.log(result);
+          this.userDatas = result.data.list;
+        })
+        .catch(() => {
+          this.$Message.error("Login Fail!");
+        });
+    },
     handleSelectAll(status) {
       this.$refs.selection.selectAll(status);
     },
@@ -177,11 +193,19 @@ export default {
       //  console.log( this.userDatas)
     },
     show(index) {
+      this.modal1 = true;
       this.$Message.info("当前查看索引" + index);
+      this.editRow = this.userDatas[index];
     },
     selectAlldata(datass) {
       this.$Message.success("选择了全部");
       console.log(datass);
+    },
+    ok() {
+      console.log('ok')
+    },
+    cancel() {
+      console.log('cancel')
     }
   }
 };
