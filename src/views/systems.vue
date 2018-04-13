@@ -6,10 +6,7 @@
         <Icon type="settings"></Icon>
         系统设置
       </h3>
-      <!-- <a href="#" slot="extra" @click.prevent="changeLimit">
-            <Icon type="ios-loop-strong"></Icon>
-            Change
-        </a> -->
+
       <Row>
         <Col span="11">
         <Menu width='140px'>
@@ -23,7 +20,7 @@
         </Col>
         <Col span="11">
         <ul>
-          <li v-for="item in movieList" :key="item">
+          <li v-for="item in movieList" :key="item.name">
             <a :href="item.url" target="_blank">{{ item.name }}</a>
             <span>
               <Icon type="ios-star" v-for="n in 4" :key="n"></Icon>

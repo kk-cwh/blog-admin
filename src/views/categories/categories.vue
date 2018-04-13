@@ -2,7 +2,7 @@
     <div>
        <Row :gutter="16">
        <Col span="4">
-       <Button @click="handleSelectAll(true)" type="primary">新增分类</Button>
+       <Button @click="toAdd" type="primary">新增分类</Button>
       </Col>
         <Col :xs="{ span: 14, offset: 2 }" :sm="{ span: 8, offset: 8}" :md="{ span: 6, offset: 10 }" :lg="{ span: 4, offset: 12 }" >
        <Form  label-position="right" :label-width="60">
@@ -30,14 +30,34 @@
         </FormItem>
       </Form>
     </Modal>
+     <Modal v-model="modal2" title="新增分类" @on-ok="ok" @on-cancel="cancel" width="480">
+     <Form :model="addRow" label-position="right" :label-width="140">
+        <FormItem label="姓名">
+          <Input v-model="addRow.name" style="width:200px"></Input>
+        </FormItem>
+        <FormItem label="邮箱">
+          <Input v-model="addRow.email" style="width:200px"></Input>
+        </FormItem>
+        <FormItem label="头像">
+          <Input v-model="addRow.avatar" style="width:200px"></Input>
+        </FormItem>
+      </Form>
+      <div slot="footer" style="color:#f60;text-align:center">
+         <Button type="default" @click="cancel">取消</Button>
+         <Button type="primary"  @click="ok">保存</Button>
+      </div>
+    </Modal>
     </div>
 </template>
 <script>
     export default {
         data () {
             return {
+              query:'',
               modal1:false,
               editRow:{},
+              modal2:false,
+              addRow:{},
                 columns: [
                     {
                         type: 'selection',
@@ -192,6 +212,11 @@
     },
     cancel() {
       console.log('cancel')
+    }, toQuery() {
+      console.log('query', this.query)
+    },
+    toAdd() {
+     this.modal2 =true;
     }
         }
     }
