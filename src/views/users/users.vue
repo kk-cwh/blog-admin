@@ -1,9 +1,12 @@
 <template>
   <div>
     <Row :gutter="16">
-      <Col :xs="{ span: 10, offset: 8 }" :sm="{ span: 8, offset: 12}" :md="{ span: 6, offset: 14 }" :lg="{ span: 4, offset: 16 }" >
+       <Col span="4">
+       <Button @click="handleSelectAll(true)" type="primary">新增用户</Button>
+      </Col>
+        <Col :xs="{ span: 14, offset: 2 }" :sm="{ span: 8, offset: 8}" :md="{ span: 6, offset: 10 }" :lg="{ span: 4, offset: 12 }" >
        <Form  label-position="right" :label-width="60">
-       <FormItem label="用户名:">
+       <FormItem label="用户名:" class="margin-bottom-10">
         <Input type="text" v-model="query" placeholder="Enter user name"></Input>
        </FormItem>
        </Form>
@@ -12,10 +15,10 @@
       <Button type="primary" @click="toQuery">查询</Button>
       </Col>
     </Row>
-     <Button @click="handleSelectAll(true)" type="primary">全选</Button>
-      <Button @click="handleSelectAll(false)">取消全选</Button>
+
     <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
-    <Page :total="dataCount" show-elevator show-sizer :page-size="10"></Page>
+
+    <Page :total="dataCount" show-elevator show-sizer :page-size="10" class="margin-top-10"></Page>
 
     <Modal v-model="modal1" title="用户信息" @on-ok="ok" @on-cancel="cancel">
       <Form :model="editRow" label-position="right" :label-width="100">
@@ -225,3 +228,5 @@ export default {
   }
 };
 </script>
+
+
