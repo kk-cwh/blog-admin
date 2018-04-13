@@ -1,7 +1,19 @@
 <template>
   <div>
-    <Button @click="handleSelectAll(true)" type="primary">全选</Button>
-    <Button @click="handleSelectAll(false)">取消全选</Button>
+    <Row :gutter="16">
+      <Col :xs="{ span: 10, offset: 8 }" :sm="{ span: 8, offset: 12}" :md="{ span: 6, offset: 14 }" :lg="{ span: 4, offset: 16 }" >
+       <Form  label-position="right" :label-width="60">
+       <FormItem label="用户名:">
+        <Input type="text" v-model="query" placeholder="Enter user name"></Input>
+       </FormItem>
+       </Form>
+      </Col>
+      <Col span="4" >
+      <Button type="primary" @click="toQuery">查询</Button>
+      </Col>
+    </Row>
+     <Button @click="handleSelectAll(true)" type="primary">全选</Button>
+      <Button @click="handleSelectAll(false)">取消全选</Button>
     <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
     <Page :total="dataCount" show-elevator show-sizer :page-size="10"></Page>
 
@@ -24,6 +36,7 @@
 export default {
   data() {
     return {
+      query:'',
       modal1: false,
       editRow: {},
       columns: [
@@ -206,6 +219,8 @@ export default {
     },
     cancel() {
       console.log('cancel')
+    },toQuery(){
+      console.log('query',this.query)
     }
   }
 };
