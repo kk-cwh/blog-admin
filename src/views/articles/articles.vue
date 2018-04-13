@@ -1,5 +1,18 @@
 <template>
     <div>
+    <Row :gutter="16">
+      <Col :xs="{ span: 10, offset: 8 }" :sm="{ span: 8, offset: 12}" :md="{ span: 6, offset: 14 }" :lg="{ span: 4, offset: 16 }" >
+       <Form  label-position="right" :label-width="60">
+       <FormItem label="标题:">
+        <Input type="text" v-model="query" placeholder="标题或副标题"></Input>
+       </FormItem>
+       </Form>
+      </Col>
+      <Col span="4" >
+      <Button type="primary" @click="toQuery">查询</Button>
+      </Col>
+    </Row>
+
         <Button @click="handleSelectAll(true)" type="primary">全选</Button>
         <Button @click="handleSelectAll(false)">取消全选</Button>
         <Table border ref="selection" :columns="columns" :data="userDatas" stripe @on-select-all="selectAlldata"></Table>
@@ -10,6 +23,7 @@
     export default {
         data () {
             return {
+              query:'',
                 columns: [
                     {
                         type: 'selection',
@@ -156,6 +170,8 @@ dataCount:function(){
             selectAlldata(datass){
                 this.$Message.success('选择了全部');
                 console.log(datass);
+            },toQuery(){
+              console.log('query',this.query)
             }
         }
     }
