@@ -243,6 +243,7 @@ export default {
 
         return self.parse(plainText);
       }
+
     });
     this.offenUsedClass = [
       {
@@ -308,7 +309,10 @@ export default {
       this.publishTimeType = "immediately";
       this.editPublishTime = false;
     },
-    handlePreview() {},
+    handlePreview() {
+      this.$store.state.app.md = this.simplemde.value();
+       this.$router.push({name: "preview_article"});
+    },
     handlePublish() { this.publishLoading = true;},
     handleSaveDraft() {}
   }

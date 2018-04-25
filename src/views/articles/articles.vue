@@ -2,7 +2,7 @@
   <div>
           <Row :gutter="16">
        <Col span="4">
-       <Button @click="handleSelectAll(true)" type="primary">创建文章</Button>
+       <Button @click="toCreateArticle()" type="primary">创建文章</Button>
       </Col>
         <Col :xs="{ span: 14, offset: 2 }" :sm="{ span: 8, offset: 8}" :md="{ span: 6, offset: 10 }" :lg="{ span: 4, offset: 12 }" >
        <Form  label-position="right" :label-width="60">
@@ -173,6 +173,9 @@ export default {
       console.log(datass);
     }, toQuery() {
       console.log('query', this.query)
+    },
+    toCreateArticle(){
+           this.$router.push({name: "add_article"});
     }
   }
 }

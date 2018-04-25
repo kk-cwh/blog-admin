@@ -6,6 +6,7 @@ import http from '@/libs/http.js';
 
 const app = {
     state: {
+      md:'',
         username:'',
         dashData:{userNumber:11,browNumber:4988,articleNumber:50,discussionNumber:20},
         cachePage: [],
@@ -198,9 +199,9 @@ const app = {
                 let data = response.data
                 let user = data.data;
                 commit('setAvator',"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3448484253,3685836170&fm=27&gp=0.jpg")
-                
+
                 this.state.username = user.name
-    
+
                 resolve()
               }
             }).catch(error => {
@@ -216,7 +217,7 @@ const app = {
         //     }).then(response => {
         //       if (response.data) {
         //         // console.log(response.data)
-    
+
         //         removeToken()
         //         commit('CLEAR_STATE')
         //         console.log(this.state)
