@@ -45,7 +45,7 @@ module.exports = {
         //匹配代理的url
         '/api': {
           // 目标服务器地址
-          target: "https://blog.zhangyake.site",
+          target: "http://laravel56.lara",
           pathRewrite: {"^/api" : "/api"},
           secure: false, // 接受 运行在 https 上的服务
           changeOrigin: true
