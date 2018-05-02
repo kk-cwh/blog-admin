@@ -130,6 +130,16 @@ export const appRouter = [
     children: [
       { path: 'config', title: '系统配置', name: 'system_index',  access: [0],icon: 'android-settings', component: () => import('@/views/systems.vue') }
     ]
+  },{
+    path: '/menus',
+    icon: 'android-menu',
+    name: 'menus',
+    title: '菜单管理',
+    component: Main,
+    access: [0],
+    children: [
+      { path: 'config', title: '菜单管理', name: 'menus_index',  access: [0],icon: 'android-settings', component: () => import('@/views/menus/menus') }
+    ]
   }
 ];
 export const routers = [
