@@ -53,10 +53,10 @@ const app = {
                  childrenArr = item.children.filter(child => {
                    if (child.access !== undefined) {
                      if (util.showThisRoute(child.access, accessCode)) {
-                       return child;
+                        return child;
                      }
                    } else {
-                     return child;
+                      return child;
                    }
                  });
                  if (childrenArr !== undefined && childrenArr.length > 0) {
@@ -157,6 +157,7 @@ const app = {
         clearOpenedSubmenu (state) {
             state.openedSubmenuArr.length = 0;
         },
+
         setMessageCount (state, count) {
             state.messageCount = count;
         },
@@ -257,6 +258,20 @@ const app = {
         //     })
         //   })
         // },
+        MenuTree ({ commit }) {
+          return new Promise((resolve, reject) => {
+            http({
+              url: '/api/menus',
+              method: 'get'
+            }).then(response => {
+              if (response.data) {
+                resolve(response.data)
+              }
+            }).catch(error => {
+              reject(error)
+            })
+          })
+        },
         // TypeList ({ commit }) {
         //   return new Promise((resolve, reject) => {
         //     http({

@@ -68,7 +68,7 @@ export default {
             .then(() => {
               this.$store.dispatch("GetUserInfo").then(() => {
                 this.$Message.success("Success!");
-                this.$router.push({name: "home_index"});
+                this.$router.push({name: "home_index"})
               });
             })
             .catch(() => {
